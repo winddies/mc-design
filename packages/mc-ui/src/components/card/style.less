@@ -1,0 +1,40 @@
+@import '../../style/basic.less';
+@import './variables.less';
+
+@prefix-cls: ~'@{common-prefix}-card';
+
+.@{prefix-cls} {
+  &-container {
+    color: @text-color;
+    font-size: @font-size-base;
+    background-color: @card-background-color;
+
+    &-bordered {
+      border-radius: @card-border-radius;
+      box-shadow: @card-box-shadow;
+      overflow: hidden;
+    }
+  }
+  &-cover {
+    display: grid;
+    // 水平和垂直方向居中
+    place-items: center;
+  }
+  &-title {
+    padding: @card-title-padding;
+    font-size: @card-title-font-size;
+    font-family: @card-title-font-family;
+    color: @card-title-color;
+  }
+  &-body {
+    padding: @card-body-padding;
+    font-size: @card-body-font-size;
+    line-height: @card-body-line-height;
+  }
+  &-footer {
+    padding: @card-footer-padding;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
