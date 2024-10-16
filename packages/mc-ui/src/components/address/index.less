@@ -1,0 +1,39 @@
+@prefix: "mc-address";
+
+.@{prefix} {
+  color: @address-color-primary;
+  font-size: @address-font-size;
+  font-family: @address-font-family;
+  height: 27px;
+
+  &-left {
+    display: flex;
+  }
+  &-icon {
+    align-self: center;
+    width: 20px;
+    height: 24px;
+    margin-bottom: 2px; // 视觉对齐
+  }
+
+  &-auth-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: FZShangKuS-R-GB;
+    &-content-bg {
+      width: 397px;
+      height: 230px;
+      background: url(https://front-static-c.ab-inbev.cn/brand/20240913/pic_queshengye.png)
+        no-repeat center/cover;
+    }
+    &-content-text {
+      color: @address-color-primary;
+      font-size: 36px;
+    }
+  }
+
+  &-btn {
+    font-size: 30px !important;
+  }
+}
