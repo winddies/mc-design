@@ -12,26 +12,26 @@
  * @Author: zenon.zhang
  * @Date: 2024-08-12 18:05:45
  * @Last Modified by: zenon.zhang
- * @Last Modified time: 2024-09-19 10:58:05
+ * @Last Modified time: 2024-10-18 18:42:27
  */
-import Event from "@/constants/event";
-import { useAddress } from "@/hooks/useAddress";
+import Event from '@/constants/event';
+import { useAddress } from '@/hooks/useAddress';
 // import { dialogHelper } from "@/utils/dialog-helper";
-import { Space } from "@nutui/nutui-react-taro";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Image, Text, View, ViewProps } from "@tarojs/components";
-import * as Taro from "@tarojs/taro";
-import classNames from "classnames";
-import { compact, isEmpty } from "lodash-es";
-import { useRequest } from "taro-hooks";
+import { Space } from '@nutui/nutui-react-taro';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Image, Text, View, ViewProps } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+import classNames from 'classnames';
+import { compact, isEmpty } from 'lodash-es';
+import { useRequest } from 'taro-hooks';
 
-import styles from "./index.less";
+import './index.less';
 
 export interface AddressProps extends ViewProps {
   /** 未获得地理位置时的默认提示语 */
   defaultTip?: string;
   /** 先决条件 */
-  prerequisite?: "privacy";
+  prerequisite?: 'privacy';
   /** 是否要阻止向用户索要地理位置权限 */
   preventAutoAuthorize?: boolean;
   /** 打开位置设置弹窗 */
@@ -39,8 +39,7 @@ export interface AddressProps extends ViewProps {
 }
 
 const Address = (props: AddressProps) => {
-  const { address, clearAddress, location, setLocation, fetchAddressInfo } =
-    useAddress();
+  const { address, clearAddress, location, setLocation, fetchAddressInfo } = useAddress();
 
   // authorized
   // undefined: 尚未向用户发起授权请求。
@@ -53,46 +52,39 @@ const Address = (props: AddressProps) => {
     const { locationEnabled } = Taro.getSystemSetting();
     if (!locationEnabled) {
       return Promise.reject({
-        errMsg: "getLocation:fail:ERROR_NOCELL&WIFI_LOCATIONSWITCHOFF",
+        errMsg: 'getLocation:fail:ERROR_NOCELL&WIFI_LOCATIONSWITCHOFF',
       });
     }
     // 2、获取微信APP授权设置
     const { locationAuthorized } = Taro.getAppAuthorizeSetting();
     // Taro.openAppAuthorizeSetting 打开对应的系统设置页面
-    if (locationAuthorized === "denied") {
+    if (locationAuthorized === 'denied') {
       return Promise.reject({
-        errMsg: "getLocation:fail:system permission denied",
+        errMsg: 'getLocation:fail:system permission denied',
       });
     }
     return Promise.resolve();
   }, []);
 
-  const _authorizeLocation = useCallback(
-    async (params: { autoAuthorize: boolean } = { autoAuthorize: true }) => {
+  const _authorizeLocation = useCallback<(params?: { autoAuthorize: boolean }) => Promise<void>>(
+    async (params = { autoAuthorize: true }) => {
       const { autoAuthorize } = params;
-      const { needAuthorization } =
-        await new Promise<Taro.getPrivacySetting.SuccessCallbackResult>(
-          (resolve) => {
-            Taro.getPrivacySetting({ success: resolve });
-          }
-        );
-      if (
-        autoAuthorize &&
-        props.prerequisite === "privacy" &&
-        needAuthorization
-      ) {
-        return Promise.reject({ errMsg: "exception:need-authorization" });
+      const { needAuthorization } = await new Promise<Taro.getPrivacySetting.SuccessCallbackResult>((resolve) => {
+        Taro.getPrivacySetting({ success: resolve });
+      });
+      if (autoAuthorize && props.prerequisite === 'privacy' && needAuthorization) {
+        return Promise.reject({ errMsg: 'exception:need-authorization' });
       }
       if (autoAuthorize && props.preventAutoAuthorize) {
         if (needAuthorization) {
           return Promise.reject({
-            errMsg: "exception:page-prevent-auto-authorize",
+            errMsg: 'exception:page-prevent-auto-authorize',
           });
         }
         const { authSetting } = await Taro.getSetting();
-        if (!authSetting["scope.userLocation"]) {
+        if (!authSetting['scope.userLocation']) {
           return Promise.reject({
-            errMsg: "exception:page-prevent-auto-authorize",
+            errMsg: 'exception:page-prevent-auto-authorize',
           });
         }
       } else {
@@ -104,7 +96,7 @@ const Address = (props: AddressProps) => {
         // {"errno":104,"errMsg":"authorize:fail privacy permission is not authorized"}
         // 2、用户拒绝了地理位置授权
         // {"errMsg":"authorize:fail auth deny"} 或者 {"errMsg":"authorize:fail:auth deny"}
-        await Taro.authorize({ scope: "scope.userLocation" });
+        await Taro.authorize({ scope: 'scope.userLocation' });
       }
       // 为了减少getLocation的调用次数，提高接口的成功率，调用之前，先确保地理位置相关的设置是正确的。
       // 如果设置有问题， 会抛出以下两个异常
@@ -118,18 +110,12 @@ const Address = (props: AddressProps) => {
         // 这里做一个优化
         // 当 location 不存在时，才去获取地址信息。
         // 避免重复获取地址信息，导致接口调用次数过多。
-        const res = await Taro.getLocation({ type: "gcj02" });
+        const res = await Taro.getLocation({ type: 'gcj02' });
         setLocation(res);
       }
       setAuthorized(true);
     },
-    [
-      checkSystemAuthorize,
-      location,
-      props.prerequisite,
-      props.preventAutoAuthorize,
-      setLocation,
-    ]
+    [checkSystemAuthorize, location, props.prerequisite, props.preventAutoAuthorize, setLocation],
   );
   const authorizeLocation = useCallback<typeof _authorizeLocation>(
     async (params) => {
@@ -140,13 +126,13 @@ const Address = (props: AddressProps) => {
         throw error;
       }
     },
-    [_authorizeLocation]
+    [_authorizeLocation],
   );
 
   useEffect(() => {
     // 当先决条件是隐私政策时，也就是说隐私政策是在其它地方处理的。
     // 通过监听事件，来处理授权状态的变化。
-    if (props.prerequisite === "privacy") {
+    if (props.prerequisite === 'privacy') {
       Taro.eventCenter.on(Event.PRIVACY_AUTH_RESOLVED, authorizeLocation);
       // Taro.eventCenter.on(Event.PRIVACY_AUTH_REJECT, authorizeLocation);
       return () => {
@@ -161,28 +147,28 @@ const Address = (props: AddressProps) => {
     authorizeLocation().catch(() => {
       setLocation(null);
       clearAddress();
-    })
+    }),
   );
 
   const onClick = async () => {
     // 当手动点击按钮时，也可能会触发隐私弹窗， 此时为了防止重复授权，需要取消对隐私授权的监听。
-    if (props.prerequisite === "privacy") {
+    if (props.prerequisite === 'privacy') {
       Taro.eventCenter.off(Event.PRIVACY_AUTH_RESOLVED, authorizeLocation);
       // Taro.eventCenter.off(Event.PRIVACY_AUTH_REJECT, authorizeLocation);
     }
 
     const { authSetting } = await Taro.getSetting();
-    const showModel = authSetting["scope.userLocation"] === false;
+    const showModel = authSetting['scope.userLocation'] === false;
 
     authorizeLocation({ autoAuthorize: false }).catch((error) => {
       const { errMsg } = error;
       // 当无法正常获取到地址信息时，需要引导用户打开对应的设置
-      if (errMsg.includes("getLocation:fail")) {
+      if (errMsg.includes('getLocation:fail')) {
         // 系统层的设置问题 - 可以引导用户打开系统权限页面
         // Taro.openAppAuthorizeSetting();
         // 暂时用Toast提示用户
-        Taro.showToast({ title: "获取位置失败，请检查定位设置", icon: "none" });
-      } else if (errMsg.includes("auth deny")) {
+        Taro.showToast({ title: '获取位置失败，请检查定位设置', icon: 'none' });
+      } else if (errMsg.includes('auth deny')) {
         // 小程序授权问题 - 打开小程序设置面板
         showModel && props.openLocationSettingDialog?.();
       } else {
@@ -201,31 +187,27 @@ const Address = (props: AddressProps) => {
     },
     {
       refreshDeps: [authorized, location],
-    }
+    },
   );
 
   const addressText = useMemo(() => {
     if (!address || isEmpty(address)) {
-      return props.defaultTip || "授权地理位置查看附近活动";
+      return props.defaultTip || '授权地理位置查看附近活动';
     }
-    return compact([
-      address.provinceName,
-      address.cityName,
-      address.districtName,
-    ]).join(" ");
+    return compact([address.provinceName, address.cityName, address.districtName]).join(' ');
   }, [address, props.defaultTip]);
 
   return (
     <View
       {...props}
-      className={classNames([styles.address, props.className])}
+      className={classNames(['mc-address', props.className])}
       onClick={!location || !authorized ? onClick : undefined}
     >
       <Space align="end" wrap={false}>
-        <View className={styles.left}>
+        <View className={'mc-address-left'}>
           <Image
             src="https://front-static-c.ab-inbev.cn/lowcode/hrb-revamp-icon-loc.png"
-            className={styles.icon}
+            className={'mc-address-icon'}
           />
           <Text>位置:</Text>
         </View>

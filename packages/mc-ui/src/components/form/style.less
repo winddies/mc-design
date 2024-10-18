@@ -1,0 +1,39 @@
+@import '../../style/basic.less';
+@import './variables.less';
+
+@prefix-cls: ~'@{common-prefix}-form';
+
+.@{prefix-cls} {
+  --nutui-form-item-label-width: 120px;
+  --nutui-form-item-body-slots-text-align: right;
+  --nutui-form-item-body-input-text-align: right;
+  --nutui-cell-padding: 30px 0;
+  --nutui-textarea-text-color: @color-primary;
+  --nutui-textarea-font: 24rpx;
+
+  :global(.nut-form-item__label) {
+    // .base-font(24rpx);
+    padding-right: 0;
+  }
+  :global(.nut-form-item__body__tips) {
+    display: none;
+    opacity: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  :global(.nut-cell-group__wrap) {
+    margin: 0;
+  }
+
+  :global(.h5-input) {
+    font-weight: 500;
+    // .base-font(24px);
+  }
+
+  :global(.nut-textarea__textarea) {
+    min-height: 80rpx;
+    max-height: 120rpx;
+    // .base-font(24rpx);
+  }
+}

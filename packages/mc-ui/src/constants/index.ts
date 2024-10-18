@@ -6,5 +6,5 @@
  * @FilePath: /mc-design/packages/mc-ui/src/constants/index.ts
  * @Description: constants export
  */
-export { default as Events } from "./event";
-export { default as API } from "./api";
+export { default as Events } from './event';
+export { default as API } from './api';

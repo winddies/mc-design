@@ -146,7 +146,7 @@ declare namespace ActivityConfig {
   type IBannerType = IBanner & {
     textLists?: ITextType[];
     animationType?: 'shake';
-    animationConfig?: import('rc-tween-one').IAnimProps;
+    // animationConfig?: import('rc-tween-one').IAnimProps;
   };
 
   interface IReacordPopup {
@@ -324,7 +324,7 @@ declare namespace ActivityConfig {
 
   interface IAnimation {
     animationType?: string;
-    animationConfig?: import('rc-tween-one').IAnimProps;
+    // animationConfig?: import('rc-tween-one').IAnimProps;
   }
 
   interface ILuckPopupConfig {

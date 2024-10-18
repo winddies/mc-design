@@ -14,9 +14,9 @@
  * @FilePath: /mc-design/packages/mc-ui/src/hooks/useHomeStore.ts
  * @Description: address 组件的状态数据管理
  */
-import Apis from "@/constants/api";
-import { create, StateCreator } from "zustand";
-import TaroRequest from "@bud-fe/request/es/taro";
+import Apis from '@/constants/api';
+import { create, StateCreator } from 'zustand';
+import TaroRequest from '@bud-fe/request/es/taro';
 
 interface IActions {
   setLocation: (params) => void;
@@ -50,17 +50,15 @@ const createAddressSlice: StateCreator<TAddressSlice> = (set, get) => ({
   },
   fetchAddressInfo: async (params: CommonEntity.IGetLocationParams) => {
     if (!get().request) {
-      console.warn("request 未初始化");
+      console.warn('request 未初始化');
       return;
     }
     const request = get().request;
-    const result = await request
-      .post(Apis.common.location, params || {}, {}, { showLoading: false })
-      .catch((err) => null);
+    const result = await request.post(Apis.common.location, params || {}, {}, { showLoading: false });
     if (result?.code === 200) {
       set({ address: result.data as CommonEntity.Location });
     }
-    console.log("fetchAddressInfo------调用成功");
+    console.log('fetchAddressInfo------调用成功');
   },
   clearAddress: () => {
     set({ address: undefined });
@@ -70,12 +68,12 @@ const createAddressSlice: StateCreator<TAddressSlice> = (set, get) => ({
 const logger = (creator: StateCreator<TAddressSlice>) => (set, get, api) =>
   creator(
     (args) => {
-      console.log("zustand.address >>> applying", args);
+      console.log('zustand.address >>> applying', args);
       set(args);
-      console.log("zustand.address >>> new state", get());
+      console.log('zustand.address >>> new state', get());
     },
     get,
-    api
+    api,
   );
 
 const addressStore = create(logger(createAddressSlice));

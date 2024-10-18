@@ -59,13 +59,13 @@ declare namespace CpeEntity {
     mechanism?: Mechanism; // 取 hitMechanismList 的第一个
 
     isMirax?: boolean;
-    mirax?: Mirax;
+    // mirax?: Mirax;
     latitude?: string;
     longitude?: string;
     sprActivityType?: import('@/constants/activity').SprActivityType;
   }
 
-  type Mirax = import('@mirax-fe/renderer/lib/api').API.ICreateResourceData;
+  // type Mirax = import('@mirax-fe/renderer/lib/api').API.ICreateResourceData;
 
   interface Mechanism {
     code: string;
