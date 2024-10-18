@@ -1,0 +1,29 @@
+// @import '@bud-fe/martech-headless-taro-ui/es/styles/index.css';
+@import '@/styles/index.less';
+
+:root,
+page {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: @text-color;
+  font-size: @font-size-base;
+  box-sizing: border-box;
+  padding: @padding-vertical @padding-horizontal;
+  background-color: @bg-color-grey;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: @text-color;
+  font-size: @font-size-base;
+  .taro_page {
+    box-sizing: border-box;
+    padding: @padding-vertical @padding-horizontal;
+    background-color: @bg-color-grey !important;
+
+    taro-button-core + taro-button-core {
+      margin-top: 0;
+    }
+  }
+}

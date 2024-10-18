@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "nx build @bud-fe/mc-ui",
+    "start": "npm run build && nx dev:weapp @bud-fe/mc-app"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nutui/nutui-react-taro": "^2.6.22",
     "classnames": "^2.5.1",
     "lodash-es": "^4.17.21",
     "react": "^18.3.1"
@@ -20,6 +21,18 @@
     "@tsconfig/recommended": "^1.0.7",
     "@vitejs/plugin-react": "^4.3.2",
     "vite": "^5.4.8",
-    "vite-bundle-analyzer": "^0.12.1"
+    "vite-bundle-analyzer": "^0.12.1",
+    "nx": "16.8.1",
+    "@tarojs/components": "3.6.16",
+    "@tarojs/helper": "3.6.16",
+    "@tarojs/plugin-framework-react": "3.6.16",
+    "@tarojs/plugin-html": "3.6.16",
+    "@tarojs/plugin-platform-h5": "3.6.16",
+    "@tarojs/plugin-platform-weapp": "3.6.16",
+    "@tarojs/react": "3.6.16",
+    "@tarojs/runtime": "3.6.16",
+    "@tarojs/shared": "3.6.16",
+    "@tarojs/taro": "3.6.16",
+    "@nutui/nutui-react-taro": "2.2.0"
   }
 }

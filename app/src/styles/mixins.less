@@ -1,0 +1,33 @@
+// 长宽
+.size(@width; @height) {
+  width: @width;
+  height: @height;
+}
+
+// 正方形
+.square(@size) {
+  width: @size;
+  height: @size;
+}
+
+// 居中定位
+.absolute-center(@pos: absolute, @top: 50%) {
+  position: @pos;
+  top: @top;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// flex 布局 - 水平垂直居中
+.flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 单行文本超出省略号
+.single-line-ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
