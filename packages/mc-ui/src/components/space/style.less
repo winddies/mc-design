@@ -1,0 +1,17 @@
+@import './variables.less';
+
+@prefix-cls: ~'@{common-prefix}-space';
+
+.@{prefix-cls} {
+  &-size {
+    &-small {
+      --nutui-space-gap: @space-gap-small;
+    }
+    &-normal {
+      --nutui-space-gap: @space-gap-normal;
+    }
+    &-large {
+      --nutui-space-gap: @space-gap-large;
+    }
+  }
+}
