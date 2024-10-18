@@ -1,0 +1,42 @@
+@import './variables.less';
+
+@prefix-cls: ~'@{common-prefix}-dialog';
+
+.@{prefix-cls} {
+  // --nutui-dialog-border-radius: 40px;
+  // --nutui-dialog-width: 620px;
+  // --nutui-dialog-padding: 36px;
+  // --nutui-dialog-content-max-height: 70vh;
+  // --nutui-dialog-content-margin: 0;
+
+  .nut-dialog__header {
+    font-family: @dialog-header-font-family;
+  }
+
+  .nut-dialog__footer {
+    margin: @dialog-footer-margin;
+    padding: @dialog-footer-padding;
+    font-family: @dialog-footer-button-font-family;
+
+    --nutui-button-small-height: @dialog-footer-button-height;
+  }
+
+  &-icon-close {
+    .square(@dialog-close-size);
+    position: fixed;
+    z-index: calc(@dialog-z-index + 1);
+
+    &-default {
+      .square(@dialog-close-size);
+    }
+    &-top-left {
+      // no-change
+    }
+    &-top-right {
+      transform: translate(-100%, 0);
+    }
+    &-bottom {
+      transform: translate(-50%, @dialog-close-bottom-margin);
+    }
+  }
+}
