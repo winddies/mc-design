@@ -4,8 +4,8 @@ import { Form as NutForm, TextArea } from '@nutui/nutui-react-taro';
 import type { InputProps, PickerRegionProps } from '@tarojs/components';
 import { Input, Picker } from '@tarojs/components';
 import classNames from 'classnames';
-import { isEmpty, join, merge, omit } from 'lodash-es';
-import React, { useMemo, useState } from 'react';
+import { isEmpty, join, omit } from 'lodash-es';
+import React, { useMemo } from 'react';
 
 import './style.less';
 
@@ -43,7 +43,7 @@ const InnerForm: React.FC<Partial<IFormProps>> = (props) => {
       if (item.type === 'textarea') {
         return (
           <NutForm.Item key={item.name} {...formItemProps}>
-            <CustomTextArea {...item.fieldProps} />
+            <TextArea {...item.fieldProps} />
           </NutForm.Item>
         );
       }
@@ -78,20 +78,10 @@ const ReginPicker: React.FC<Partial<IRegionPickerProps>> = (props) => {
       <Input
         disabled
         placeholder="请选择地区"
-        value={join(_value, ' ')}
+        value={isEmpty(_value) ? undefined : join(_value, ' ')}
         className={classNames({ [`${prefix}-placeholder`]: isEmpty(_value) })}
       />
     </Picker>
-  );
-};
-
-const CustomTextArea: React.FC<Partial<TextAreaProps>> = (props) => {
-  const [cusStyle, setCusStyle] = useState<React.CSSProperties>({ marginTop: '5rpx' });
-  return (
-    <TextArea
-      {...{ ...props, style: merge({}, props?.style, cusStyle) }}
-      onChange={(e) => setCusStyle(e ? { marginTop: '2rpx' } : { marginTop: '5rpx' })}
-    />
   );
 };
 

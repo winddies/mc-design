@@ -10,5 +10,5 @@ export * from './address';
 export * from './card';
 export * from './dialog';
 export * from './dialog/helper';
-// export * from './form';
+export * from './form';
 export * from './space';

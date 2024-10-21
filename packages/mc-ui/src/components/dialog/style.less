@@ -8,19 +8,33 @@
   // --nutui-dialog-padding: 36px;
   // --nutui-dialog-content-max-height: 70vh;
   // --nutui-dialog-content-margin: 0;
+  .nut-dialog {
+    padding: 0;
+    &__header {
+      font-family: @dialog-header-font-family;
+      padding: @dialog-header-padding;
+      box-sizing: border-box;
+    }
 
-  .nut-dialog__header {
-    font-family: @dialog-header-font-family;
+    &__content {
+      margin: @dialog-content-margin;
+      box-sizing: border-box;
+
+      & > view {
+        padding: @dialog-content-padding;
+        box-sizing: border-box;
+      }
+    }
+
+    &__footer {
+      margin: @dialog-footer-margin;
+      padding: @dialog-footer-padding;
+      box-sizing: border-box;
+      font-family: @dialog-footer-button-font-family;
+
+      --nutui-button-small-height: @dialog-footer-button-height;
+    }
   }
-
-  .nut-dialog__footer {
-    margin: @dialog-footer-margin;
-    padding: @dialog-footer-padding;
-    font-family: @dialog-footer-button-font-family;
-
-    --nutui-button-small-height: @dialog-footer-button-height;
-  }
-
   &-icon-close {
     .square(@dialog-close-size);
     position: fixed;
