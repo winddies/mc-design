@@ -3,12 +3,19 @@
 @prefix-cls: ~'@{common-prefix}-form';
 
 .@{prefix-cls} {
-  --nutui-form-item-label-width: 120px;
-  --nutui-form-item-body-slots-text-align: right;
-  --nutui-form-item-body-input-text-align: right;
-  --nutui-cell-padding: 30px 0;
-  // --nutui-textarea-text-color: @color-primary;
-  // --nutui-textarea-font: 24rpx;
+  --nutui-form-item-label-width: @form-item-label-width;
+  --nutui-cell-padding: @form-item-padding;
+
+  &.placement {
+    &-left {
+      --nutui-form-item-body-slots-text-align: left;
+      --nutui-form-item-body-input-text-align: left;
+    }
+    &-right {
+      --nutui-form-item-body-slots-text-align: right;
+      --nutui-form-item-body-input-text-align: right;
+    }
+  }
 
   .nut-form {
     &-item {

@@ -4,7 +4,7 @@ import { Form as NutForm, TextArea } from '@nutui/nutui-react-taro';
 import type { InputProps, PickerRegionProps } from '@tarojs/components';
 import { Input, Picker } from '@tarojs/components';
 import classNames from 'classnames';
-import { isEmpty, join, omit } from 'lodash-es';
+import { get, isEmpty, join, omit, toString } from 'lodash-es';
 import React, { useMemo } from 'react';
 
 import './style.less';
@@ -22,6 +22,8 @@ export type IFormItemProps = Partial<FormItemProps> &
   );
 export interface IFormProps extends FormProps {
   items: IFormItemProps[];
+  labelInPlaceholder: boolean; // default false
+  placement: 'left' | 'right'; // default 'left'
 }
 
 const prefix = getPrefixCls('form');
@@ -31,35 +33,54 @@ const InnerForm: React.FC<Partial<IFormProps>> = (props) => {
     if (!props.items || isEmpty(props.items)) {
       return props.children;
     }
-    return props.items.map((item) => {
-      const formItemProps = omit(item, 'type', 'fieldProps');
-      if (item.type === 'input') {
-        return (
-          <NutForm.Item key={item.name} getValueFromEvent={(e) => e.target.value} {...formItemProps}>
-            <Input {...item.fieldProps} />
-          </NutForm.Item>
-        );
-      }
-      if (item.type === 'textarea') {
-        return (
-          <NutForm.Item key={item.name} {...formItemProps}>
-            <TextArea {...item.fieldProps} />
-          </NutForm.Item>
-        );
-      }
-      if (item.type === 'region') {
-        return (
-          <NutForm.Item key={item.name} {...formItemProps}>
-            <ReginPicker {...item.fieldProps} />
-          </NutForm.Item>
-        );
-      }
-      return <></>;
-    });
+    return props.items
+      .map((item) => {
+        if (props.labelInPlaceholder) {
+          return {
+            ...item,
+            label: undefined,
+            fieldProps: {
+              ...item.fieldProps,
+              placeholder: item.label || toString(get(item, ['fieldProps', 'placeholder'])),
+            } as any,
+          };
+        }
+        return item;
+      })
+      .map((item) => {
+        const formItemProps = omit(item, 'type', 'fieldProps');
+        if (item.type === 'input') {
+          return (
+            <NutForm.Item key={item.name} getValueFromEvent={(e) => e.target.value} {...formItemProps}>
+              <Input {...item.fieldProps} />
+            </NutForm.Item>
+          );
+        }
+        if (item.type === 'textarea') {
+          return (
+            <NutForm.Item key={item.name} {...formItemProps}>
+              <TextArea {...item.fieldProps} />
+            </NutForm.Item>
+          );
+        }
+        if (item.type === 'region') {
+          return (
+            <NutForm.Item key={item.name} {...formItemProps}>
+              <ReginPicker {...item.fieldProps} />
+            </NutForm.Item>
+          );
+        }
+        return <></>;
+      });
   }, [props.children, props.items]);
 
   return (
-    <NutForm labelPosition="left" divider className={classNames(prefix, props.className)} {...props}>
+    <NutForm
+      labelPosition="left"
+      divider
+      {...props}
+      className={classNames(prefix, `placement-${props.placement || 'left'}`, props.className)}
+    >
       {formItems}
     </NutForm>
   );

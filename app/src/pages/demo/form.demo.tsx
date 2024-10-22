@@ -8,15 +8,6 @@ const DialogDemo = () => {
   const items = useMemo<IFormProps['items']>(
     () => [
       { type: 'input', label: '输入框', name: 'input', fieldProps: { placeholder: '请输入....' } },
-      {
-        type: 'input',
-        label: '输入框',
-        name: 'input',
-        fieldProps: { placeholder: '请输入....' },
-        rules: [{ required: true }],
-      },
-      { type: 'input', label: '输入框', name: 'input', fieldProps: { placeholder: '请输入....', disabled: true } },
-      { type: 'textarea', label: '文本框', name: 'textarea' },
       { type: 'textarea', label: '文本框', name: 'textarea', fieldProps: { maxLength: 100, showCount: true } },
       { type: 'region', label: '区域', name: 'region' },
     ],
@@ -29,7 +20,16 @@ const DialogDemo = () => {
 
   return (
     <Space direction="vertical">
-      <Card title="普通表单">
+      <Card title="普通表单-基础样式">
+        <Form items={items} form={form} />
+      </Card>
+      <Card title="普通表单-右对齐">
+        <Form items={items} form={form} placement="right" />
+      </Card>
+      <Card title="普通表单-label-in-placeholder">
+        <Form items={items} form={form} labelInPlaceholder />
+      </Card>
+      <Card title="自定义提交">
         <Form
           items={items}
           form={form}
