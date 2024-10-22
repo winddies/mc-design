@@ -1,25 +1,16 @@
-/*
- * @Author: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
- * @Date: 2024-10-16 15:21:58
- * @LastEditors: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
- * @LastEditTime: 2024-10-16 16:50:29
- * @FilePath: /mc-design/packages/mc-ui/src/components/configprovider/index.tsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
-import { CSSProperties, FunctionComponent, createContext, useMemo } from 'react';
+import { FunctionComponent, createContext, useMemo } from 'react';
 import classNames from 'classnames';
 import { kebabCase } from 'lodash-es';
 import type { MCCSSVariables } from './types';
+import { BasicComponent } from '@nutui/nutui-react-taro/dist/types/utils/typings';
 import { View } from '@tarojs/components';
 
-export interface ConfigProviderProps {
-  theme: Record<string | MCCSSVariables, string>;
-  style: CSSProperties;
-  className: string;
-  children: any;
+export interface ConfigProviderProps extends BasicComponent {
+  /** 主题变量 */
+  theme?: Record<string | MCCSSVariables, string>;
 }
 
-const classPrefix = 'mc-configprovider';
+const classPrefix = 'mc-config-provider';
 
 const ConfigContext = createContext<Partial<ConfigProviderProps> | null>(null);
 
@@ -53,4 +44,4 @@ export const ConfigProvider: FunctionComponent<Partial<ConfigProviderProps>> = (
   );
 };
 
-ConfigProvider.displayName = 'NutConfigProvider';
+ConfigProvider.displayName = 'mc-config-provider';

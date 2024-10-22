@@ -26,6 +26,7 @@ import { compact, isEmpty } from 'lodash-es';
 import { useRequest } from 'taro-hooks';
 
 import './index.less';
+import * as styles from './index.less';
 
 export interface AddressProps extends ViewProps {
   /** 未获得地理位置时的默认提示语 */
@@ -34,11 +35,13 @@ export interface AddressProps extends ViewProps {
   prerequisite?: 'privacy';
   /** 是否要阻止向用户索要地理位置权限 */
   preventAutoAuthorize?: boolean;
-  /** 打开位置设置弹窗 */
-  openLocationSettingDialog?: () => void;
+  /** 获取地理位置授权信息为被拒绝时触发 */
+  onLocationAuthDenied?: () => void;
+  /** 获取地理位置授权信息失败时触发 */
+  onLocationAuthFailed?: () => void;
 }
 
-const Address = (props: AddressProps) => {
+export default function Address(props: AddressProps) {
   const { address, clearAddress, location, setLocation, fetchAddressInfo } = useAddress();
 
   // authorized
@@ -117,8 +120,8 @@ const Address = (props: AddressProps) => {
     },
     [checkSystemAuthorize, location, props.prerequisite, props.preventAutoAuthorize, setLocation],
   );
-  const authorizeLocation = useCallback<typeof _authorizeLocation>(
-    async (params) => {
+  const authorizeLocation = useCallback(
+    async (params: { autoAuthorize: boolean } = { autoAuthorize: true }) => {
       try {
         await _authorizeLocation(params);
       } catch (error) {
@@ -167,10 +170,11 @@ const Address = (props: AddressProps) => {
         // 系统层的设置问题 - 可以引导用户打开系统权限页面
         // Taro.openAppAuthorizeSetting();
         // 暂时用Toast提示用户
+        props.onLocationAuthFailed?.();
         Taro.showToast({ title: '获取位置失败，请检查定位设置', icon: 'none' });
       } else if (errMsg.includes('auth deny')) {
         // 小程序授权问题 - 打开小程序设置面板
-        showModel && props.openLocationSettingDialog?.();
+        showModel && props.onLocationAuthDenied?.();
       } else {
         // 其它异常 暂不处理
       }
@@ -215,7 +219,7 @@ const Address = (props: AddressProps) => {
       </Space>
     </View>
   );
-};
+}
 
 // export const openLocationSettingDialog = () => {
 //   dialogHelper.showDialog({
@@ -238,4 +242,4 @@ const Address = (props: AddressProps) => {
 //   });
 // };
 
-export default Address;
+Address.displayName = 'mc-address';

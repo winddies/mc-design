@@ -4,6 +4,8 @@ import { resolve } from 'path';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { defineConfig } from 'vite';
 
+const path = require('path');
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -14,7 +16,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        components: resolve(__dirname, './src/components/index.ts'),
+        components: resolve(__dirname, './src/components/index.tsx'),
         hooks: resolve(__dirname, './src/hooks/index.ts'),
         constants: resolve(__dirname, './src/constants/index.ts'),
       },
@@ -33,14 +35,12 @@ export default defineConfig({
     },
     outDir: 'lib', // 打包后存放的目录文件
   },
+
   css: {
     preprocessorOptions: {
       less: {
-        modifyVars: {
-          prefixCls: 'mc-', // 名称前缀
-        },
+        additionalData: `@import "${path.resolve(__dirname, 'src/style/variable.less')}";`,
         javascriptEnabled: true,
-        additionalData: `@import "@/style/variable.less";`,
       },
     },
   },

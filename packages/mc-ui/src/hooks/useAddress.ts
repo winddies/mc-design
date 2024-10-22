@@ -2,15 +2,7 @@
  * @Author: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
  * @Date: 2024-10-14 18:25:49
  * @LastEditors: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
- * @LastEditTime: 2024-10-16 11:39:49
- * @FilePath: /mc-design/packages/mc-ui/src/hooks/useAddress.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
-/*
- * @Author: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
- * @Date: 2024-10-14 18:25:49
- * @LastEditors: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
- * @LastEditTime: 2024-10-16 11:34:45
+ * @LastEditTime: 2024-10-22 10:52:22
  * @FilePath: /mc-design/packages/mc-ui/src/hooks/useHomeStore.ts
  * @Description: address 组件的状态数据管理
  */
@@ -54,7 +46,7 @@ const createAddressSlice: StateCreator<TAddressSlice> = (set, get) => ({
       return;
     }
     const request = get().request;
-    const result = await request.post(Apis.common.location, params || {}, {}, { showLoading: false });
+    const result = await request.post(Apis.common.location, params || {}, {}, { showLoading: false }).catch(() => null);
     if (result?.code === 200) {
       set({ address: result.data as CommonEntity.Location });
     }
@@ -84,6 +76,8 @@ const addressStore = create(logger(createAddressSlice));
  * @returns 地址组件的数据状态
  */
 export const useAddress = (config?: { request: TaroRequest }) => {
-  addressStore.getState().init(config);
+  if (config) {
+    addressStore.getState().init(config);
+  }
   return addressStore();
 };
