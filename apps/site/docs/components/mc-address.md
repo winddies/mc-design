@@ -6,12 +6,10 @@ hide_title: true
 
 展示当前的地理位置，需要结合 useAddress 一起使用
 
----
-
 ### 引入
 
 ```typescript
-import { Address } from "@bud-fe/mc-ui";
+import { Address } from '@bud-fe/mc-ui';
 ```
 
 ### 示例代码
@@ -35,9 +33,11 @@ function OtherPage() {
 
 ### 注意：
 
-`useAddress` 并不是一个一次性使用的 hook，这个跟我们常用的 react 的 hook 概念并不相同，它本身返回的是一个 zustand 数据管理集合，所以具备持久化的特性。
-虽然这样比较方便的解决了数据获取的问题，但是在使用中要注意需要配合 Address 组件使用，以及小程序冷启动时导致的数据失效问题。最好避免此类问题的方式是：
-不需要关心是否在一个组件，但`useAddress` 跟使用 `<Address />` 组件的地方最好在同一个页面内。
+<div class="theme-admonition theme-admonition-tip  alert alert--success">
+  `useAddress` 并不是一个一次性使用的 hook，这个跟我们常用的 react 的 hook 概念并不相同，它本身返回的是一个 zustand 数据管理集合，所以具备持久化的特性。
+  虽然这样比较方便的解决了数据获取的问题，但是在使用中要注意需要配合 Address 组件使用，以及小程序冷启动时导致的数据失效问题。最好避免此类问题的方式是：
+  不需要关心是否在一个组件，但`useAddress` 跟使用 `<Address />` 组件的地方最好在同一个页面内。
+</div>
 
 ## Props
 

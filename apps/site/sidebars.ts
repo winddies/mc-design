@@ -2,11 +2,11 @@
  * @Author: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
  * @Date: 2024-10-12 16:40:50
  * @LastEditors: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
- * @LastEditTime: 2024-10-21 08:44:54
+ * @LastEditTime: 2024-10-22 11:29:39
  * @FilePath: /mc-design/site/sidebars.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 /**
  * Creating a sidebar enables you to:
@@ -24,14 +24,19 @@ const sidebars: SidebarsConfig = {
     {
       组件: [
         {
-          type: "doc",
-          id: "components/mc-phone-number-button",
-          label: "手机号授权按钮",
+          type: 'doc',
+          id: 'components/mc-config-provider',
+          label: '全局配置',
         },
         {
-          type: "doc",
-          id: "components/mc-address",
-          label: "地理位置",
+          type: 'doc',
+          id: 'components/mc-phone-number-button',
+          label: '手机号授权按钮',
+        },
+        {
+          type: 'doc',
+          id: 'components/mc-address',
+          label: '地理位置',
         },
       ],
     },

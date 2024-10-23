@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "nx build @bud-fe/mc-ui",
     "build:all": "nx build @bud-fe/mc-ui && nx build @bud-fe/mc-app",
-    "start": "npm run build && nx dev:weapp @bud-fe/mc-app"
+    "start": "npm run build && nx dev:weapp @bud-fe/mc-app",
+    "start:doc": "nx run mc-site:start ",
+    "affect": "nx affected:build --exclude @bud-fe/mc-app @bud-fe/mc-site"
   },
   "keywords": [],
   "author": "",
