@@ -1,0 +1,28 @@
+@import './variables.less';
+
+@prefix-cls: ~'@{common-prefix}-button';
+
+.@{prefix-cls} {
+  --nutui-button-default-padding: 6px;
+  --nutui-button-default-color: white;
+  --nutui-button-large-font-size: 36px;
+  --nutui-button-default-font-size: 24px;
+  --nutui-button-small-font-size: 18px;
+  --nutui-button-mini-font-size: 18px;
+  --nutui-button-border-width: 0;
+  --nutui-button-default-bg-color: @button-background;
+
+  .nut-button {
+    &--disabled {
+      background: #ccc;
+      background-color: #ccc;
+    }
+    &--large {
+      font-size: var(--nutui-button-large-font-size, 36px);
+    }
+  }
+  &-link {
+    color: @color-primary !important;
+    background: none !important;
+  }
+}

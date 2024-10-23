@@ -20,6 +20,7 @@
     "typescript": "^5.6.3"
   },
   "devDependencies": {
+    "@iceworks/spec": "1.6.0",
     "@rollup/plugin-typescript": "^12.1.1",
     "@tsconfig/recommended": "^1.0.7",
     "@types/node": "^22.7.6",
@@ -30,16 +31,16 @@
     "vite": "^5.4.8",
     "vite-bundle-analyzer": "^0.12.1",
     "nx": "16.8.1",
-    "@tarojs/components": "3.6.16",
-    "@tarojs/helper": "3.6.16",
-    "@tarojs/plugin-framework-react": "3.6.16",
-    "@tarojs/plugin-html": "3.6.16",
-    "@tarojs/plugin-platform-h5": "3.6.16",
-    "@tarojs/plugin-platform-weapp": "3.6.16",
-    "@tarojs/react": "3.6.16",
-    "@tarojs/runtime": "3.6.16",
-    "@tarojs/shared": "3.6.16",
-    "@tarojs/taro": "3.6.16",
+    "@tarojs/components": "3.6.19",
+    "@tarojs/helper": "3.6.19",
+    "@tarojs/plugin-framework-react": "3.6.19",
+    "@tarojs/plugin-html": "3.6.19",
+    "@tarojs/plugin-platform-h5": "3.6.19",
+    "@tarojs/plugin-platform-weapp": "3.6.19",
+    "@tarojs/react": "3.6.19",
+    "@tarojs/runtime": "3.6.19",
+    "@tarojs/shared": "3.6.19",
+    "@tarojs/taro": "3.6.19",
     "@nutui/nutui-react-taro": "2.2.0"
   }
 }

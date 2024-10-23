@@ -14,15 +14,13 @@
   "author": "Bud Fe",
   "license": "ISC",
   "dependencies": {
-    "@tarojs/taro": "^4.0.6",
-    "@types/react-dom": "^18.3.1",
     "classnames": "^2.5.1",
     "react": "^18.3.1"
   },
   "peerDependencies": {
     "@bud-fe/request": "^1.6.2",
-    "@tarojs/components": "3.6.16",
-    "@tarojs/taro": "3.6.16",
+    "@tarojs/components": "3.6.19",
+    "@tarojs/taro": "3.6.19",
     "@nutui/nutui-react-taro": "2.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -35,6 +33,10 @@
   },
   "devDependencies": {
     "@bud-fe/request": "^1.6.2",
+    "@tarojs/taro": "3.6.19",
+    "@tarojs/components": "3.6.19",
+    "@tarojs/taro-loader": "3.6.19",
+    "taro-hooks": "2.0.8",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.7.6",
     "@types/react": "^18.3.11",
@@ -44,7 +46,7 @@
     "react-docgen-typescript": "^2.2.2",
     "react-dom": "^18.3.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "taro-hooks": "2.0.8",
+    "tslib": "^2.8.0",
     "vite-plugin-dts": "^4.2.4"
   }
 }

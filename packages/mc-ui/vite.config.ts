@@ -4,8 +4,6 @@ import { resolve } from 'path';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { defineConfig } from 'vite';
 
-const path = require('path');
-
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -16,7 +14,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        components: resolve(__dirname, './src/components/index.tsx'),
+        components: resolve(__dirname, './src/components/index.ts'),
         hooks: resolve(__dirname, './src/hooks/index.ts'),
         constants: resolve(__dirname, './src/constants/index.ts'),
       },
@@ -39,7 +37,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        additionalData: `@import "${path.resolve(__dirname, 'src/style/variable.less')}";`,
+        additionalData: `@import "${resolve(__dirname, 'src/style/variable.less')}";`,
         javascriptEnabled: true,
       },
     },

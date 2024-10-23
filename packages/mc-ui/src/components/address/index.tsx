@@ -12,7 +12,7 @@
  * @Author: zenon.zhang
  * @Date: 2024-08-12 18:05:45
  * @Last Modified by: zenon.zhang
- * @Last Modified time: 2024-10-18 18:42:27
+ * @Last Modified time: 2024-10-23 14:12:11
  */
 import Event from '@/constants/event';
 import { useAddress } from '@/hooks/useAddress';
@@ -26,7 +26,6 @@ import { compact, isEmpty } from 'lodash-es';
 import { useRequest } from 'taro-hooks';
 
 import './index.less';
-import * as styles from './index.less';
 
 export interface AddressProps extends ViewProps {
   /** 未获得地理位置时的默认提示语 */

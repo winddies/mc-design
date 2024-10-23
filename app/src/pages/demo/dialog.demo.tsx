@@ -94,9 +94,6 @@ const BaseDialogUsage = () => {
           closeIcon
           closeOnOverlayClick={false}
           // footer={null}
-          footerDirection="vertical"
-          hideCancelButton
-          hide
         />
       </RootPortal>
     </Card>

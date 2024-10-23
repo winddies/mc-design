@@ -72,3 +72,134 @@ page {
     }
   }
 }
+
+.prize_box {
+  .flex-center();
+  flex-direction: column;
+  justify-content: flex-start;
+  cursor: pointer;
+  background: #fff;
+  height: 410px;
+  width: 315px !important;
+  box-sizing: border-box;
+  box-shadow: 6px 6px 30px rgba(0, 16, 68, 0.13);
+  border-radius: 20px;
+  overflow: hidden;
+
+  .prize_info {
+    .flex-center();
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+
+    .prize_info_image_wrapper {
+      position: relative;
+      max-height: 300px !important;
+      width: 100%;
+      background: linear-gradient(90deg, #84d0f4 0%, #0089cc 100%);
+      .flex-center();
+
+      .prize_image {
+        position: relative;
+        max-height: 300px !important;
+        width: calc(100% - 48px);
+      }
+      .locked_icon {
+        background-color: #00000070;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      }
+      .locked_icon::after {
+        content: '';
+        .absolute-center();
+        width: 80px;
+        height: 80px;
+        background-image: url('https://front-static-c.ab-inbev.cn/brand/20240815/ic_suo@2x.png');
+        .background-config();
+        z-index: 100;
+      }
+
+      .preferential_icon {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 116px;
+        height: 46px;
+        background-image: url('https://front-static-c.ab-inbev.cn/brand/20240815/pic_shangpinbiaoqian@2x.png');
+        .background-config();
+      }
+    }
+  }
+
+  .prize_name {
+    font-family: utf;
+    color: #001b6e;
+    width: 100%;
+    font-size: 30px;
+    line-height: 34px;
+    margin-top: 14px;
+    text-indent: 20px;
+    .single-line-ellipsis();
+    padding: 0;
+  }
+
+  .prize_active {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 20px;
+    .flex-center();
+    justify-content: space-between;
+    flex-direction: row;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 400;
+    font-family: 'FZShangKuS-R-GB';
+    margin-bottom: 10px;
+    color: #001c52;
+
+    .count {
+      font-family: ntf-grand-medium;
+      font-size: 40px;
+      line-height: 48px;
+      margin-right: 4px;
+    }
+
+    .original_count {
+      font-family: ntf-grand-medium;
+      margin-left: 7px;
+      font-size: 24px;
+      line-height: 24px;
+      color: #ccc;
+      text-decoration: line-through;
+    }
+
+    .prize_active_btn {
+      min-width: 113px;
+      height: 34px;
+      background: linear-gradient(90deg, #84d0f4 0%, #0089cc 100%);
+      border-radius: 17px;
+      font-family: utf;
+
+      &.prize_active_btn_fail {
+        background: #ccc;
+      }
+    }
+
+    .prize_active_text {
+      font-size: 18px;
+      line-height: 34px;
+    }
+
+    .prize_active_bold {
+      font-weight: bold;
+      font-family: bud-font;
+      // font-size: 19px;
+      line-height: 31px;
+    }
+  }
+}

@@ -1,10 +1,14 @@
-import { Swiper, SwiperItem, SwiperProps, View } from '@tarojs/components';
-import { fromPairs, isFunction, merge } from 'lodash-es';
+import { SwiperItem, View } from '@tarojs/components';
+import { fromPairs, merge } from 'lodash-es';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import Taro from '@tarojs/taro';
+import { getPrefixCls } from '@/utils';
+import { TitledSwiper, TitledSwiperProps } from './titled-swiper';
 
 import './style.less';
+
+const prefix = getPrefixCls('swiper-list');
 
 export interface ISwiperListProps {
   listData: any[];
@@ -50,26 +54,29 @@ export const SwiperList: React.FC<ISwiperListProps> = (props: ISwiperListProps) 
   // }, [itemCount, swiperConfig.nextMargin]);
 
   const handleSwiperProps = useCallback(
-    (swiperIndex: number) => ({
-      ...swiperConfig,
-      className: classNames('swiper_wrapper', swiperConfig?.className),
-      style: merge({ height: '447rpx' }, swiperConfig?.style),
-      previousMargin: swiperConfig?.previousMargin || Taro.pxTransform(50),
-      nextMargin: swiperConfig?.nextMargin || Taro.pxTransform(365),
-      current: swiperCurrent?.[swiperIndex],
-      onChange: (...args) => handleChange({ ...args, swiperIndex }),
-    }),
-    [handleChange, isMultiple, swiperConfig?.previousMargin, swiperCurrent],
+    (swiperIndex: number) => {
+      const { swiperProps = {} } = swiperConfig || {};
+      return {
+        ...swiperProps,
+        className: classNames('swiper_wrapper', swiperProps.className),
+        style: merge({ height: Taro.pxTransform(448) }, swiperProps.style),
+        previousMargin: swiperProps.previousMargin || Taro.pxTransform(50),
+        nextMargin: swiperProps.nextMargin || Taro.pxTransform(365),
+        current: swiperCurrent?.[swiperIndex],
+        onChange: (...args) => handleChange({ ...args, swiperIndex }),
+      };
+    },
+    [handleChange, swiperConfig, swiperCurrent],
   );
 
   if (!listData || listData?.length === 0) return null;
 
   return (
-    <View className="swiper_list_wrapper">
+    <View className={classNames(prefix, `${prefix}-wrapper`)}>
       {listData?.map((item, index) => {
         const swiperProps = handleSwiperProps(index);
         return (
-          <TitledSwiper {...swiperProps} title={() => renderTitle?.(item)}>
+          <TitledSwiper swiperProps={swiperProps} title={() => renderTitle?.(item)}>
             <SwiperItems
               isMultiple={isMultiple}
               renderCard={renderCard}
@@ -116,33 +123,4 @@ const SwiperItems: React.FC<{
   return swiperItems;
 };
 
-export interface TitledSwiperProps extends SwiperProps {
-  title: React.ReactNode | (() => React.ReactNode);
-  titleClassName: string;
-  titleStyle: React.CSSProperties;
-
-  contentClassName: string;
-  contentStyle: React.CSSProperties;
-}
-
-export const TitledSwiper: React.FC<Partial<TitledSwiperProps>> = (props) => {
-  const { title, titleClassName, titleStyle, contentStyle, contentClassName, ...rest } = props;
-
-  const titleNode = useMemo(() => {
-    if (isFunction(title)) {
-      return title();
-    }
-    return title;
-  }, [title]);
-
-  return (
-    <View className="titled-swiper-container">
-      <View className={classNames('group_title', titleClassName)} style={titleStyle}>
-        {titleNode}
-      </View>
-      <View className={classNames('content', contentClassName)} style={contentStyle}>
-        <Swiper {...rest} className={classNames('swiper_wrapper', rest.className)} />
-      </View>
-    </View>
-  );
-};
+export * from './titled-swiper';

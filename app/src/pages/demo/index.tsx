@@ -8,6 +8,7 @@ const demos = [
   { title: '对话框', value: 'dialog', Component: require(`./dialog.demo`).default },
   { title: '卡片', value: 'card', Component: require(`./card.demo`).default },
   { title: '表单', value: 'form', Component: require(`./form.demo`).default },
+  { title: '其它', value: 'others', Component: require(`./others.demo`).default },
   // { title: '用户面板', value: 'user-profile', Component: require(`./user-profile.demo`).default },
 ];
 
