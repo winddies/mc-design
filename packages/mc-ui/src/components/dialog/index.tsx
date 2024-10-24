@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { isBoolean, uniqueId } from 'lodash-es';
 import type { CSSProperties, PropsWithoutRef, ReactNode } from 'react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import './style.less';
 
@@ -48,6 +48,7 @@ export const Dialog = (props: Omit<Partial<IDialogExProps>, 'ref'>) => {
     if (!props.closeIcon || !props.visible) {
       return;
     }
+
     Taro.nextTick(() => {
       const dialogRoot = document.getElementsByClassName(dialogUniqKey)[0]?.parentElement;
       if (!dialogRoot) {
@@ -77,7 +78,9 @@ export const Dialog = (props: Omit<Partial<IDialogExProps>, 'ref'>) => {
             dialogRoot.appendChild(closePortal.current!);
           }
           if (closePortal.current) {
-            ReactDOM.render(
+            const root = createRoot(closePortal.current);
+
+            root.render(
               <View
                 className={classNames([
                   `${prefix}-icon-close`,
@@ -88,7 +91,6 @@ export const Dialog = (props: Omit<Partial<IDialogExProps>, 'ref'>) => {
               >
                 {closeIconElm}
               </View>,
-              closePortal.current,
             );
           }
         });

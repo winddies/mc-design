@@ -1,7 +1,7 @@
 import { RootPortal } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { uniqueId } from 'lodash-es';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Dialog, IDialogExProps } from '.';
 
 class DialogHelper {
@@ -10,7 +10,8 @@ class DialogHelper {
 
   onClose() {
     if (this.portal) {
-      ReactDOM.unmountComponentAtNode(this.portal);
+      const root = createRoot(this.portal);
+      root.unmount();
     }
   }
 
@@ -30,8 +31,10 @@ class DialogHelper {
     if (root && this.portal) {
       root.appendChild(this.portal);
     }
+
+    const portalRoot = createRoot(this.portal);
     if (this.portal) {
-      ReactDOM.render(
+      portalRoot.render(
         <RootPortal>
           <Dialog
             visible
@@ -52,7 +55,6 @@ class DialogHelper {
             }}
           />
         </RootPortal>,
-        this.portal,
       );
     }
   }

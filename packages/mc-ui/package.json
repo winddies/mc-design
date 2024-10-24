@@ -2,11 +2,12 @@
   "name": "@bud-fe/mc-ui",
   "version": "1.0.0",
   "description": "c 端组件库",
-  "main": "lib/components.js",
-  "module": "lib/components.mjs",
+  "main": "lib/components/index.js",
+  "module": "lib/components/index.mjs",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc",
+    "clean": "rm -rf lib",
+    "build": "pnpm clean && vite build && tsc  --emitDeclarationOnly --outDir lib",
     "analyze": "vite build --mode analyze",
     "docgen": "ts-node docgen.ts"
   },
@@ -17,6 +18,9 @@
     "classnames": "^2.5.1",
     "react": "^18.3.1"
   },
+  "files": [
+    "lib"
+  ],
   "peerDependencies": {
     "@bud-fe/request": "^1.6.2",
     "@tarojs/components": "3.6.19",
