@@ -1,4 +1,4 @@
-import { Button, Card, Space } from '@bud-fe/mc-ui';
+import { Card, Space, Button } from '@bud-fe/mc-ui';
 import { map, times } from 'lodash-es';
 
 const SpaceDemo = () => {
