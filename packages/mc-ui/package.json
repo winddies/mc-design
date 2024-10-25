@@ -1,6 +1,6 @@
 {
   "name": "@bud-fe/mc-ui",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "description": "c 端组件库",
   "main": "lib/components/index.js",
   "module": "lib/components/index.mjs",
