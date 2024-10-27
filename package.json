@@ -8,7 +8,8 @@
     "build": "nx build @bud-fe/mc-ui",
     "build:all": "nx build @bud-fe/mc-ui && nx build @bud-fe/mc-app",
     "start": "npm run build && nx dev:weapp @bud-fe/mc-app",
-    "start:doc": "nx run mc-site:start ",
+    "start:doc": "nx run @bud-fe/mc-site:start",
+    "build:doc": "nx run @bud-fe/mc-site:build",
     "affect": "nx affected:build --exclude @bud-fe/mc-app @bud-fe/mc-site"
   },
   "keywords": [],
