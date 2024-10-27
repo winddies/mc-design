@@ -44,3 +44,5 @@ export const TitledSwiper: React.FC<Partial<TitledSwiperProps>> = (props) => {
     </View>
   );
 };
+
+TitledSwiper.displayName = 'mc-titled-swiper';

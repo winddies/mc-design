@@ -55,3 +55,5 @@ export const Card = (props: ICardProps) => {
     </View>
   );
 };
+
+Card.displayName = 'mc-card';

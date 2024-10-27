@@ -123,4 +123,6 @@ const SwiperItems: React.FC<{
   return swiperItems;
 };
 
+SwiperList.displayName = 'mc-swiper-list';
+
 export * from './titled-swiper';

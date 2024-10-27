@@ -99,3 +99,5 @@ export const Dialog = (props: Omit<Partial<IDialogExProps>, 'ref'>) => {
 
   return <NutDialog {...props} className={classNames([dialogUniqKey, prefix, props.className])} />;
 };
+
+Dialog.displayName = 'mc-dialog';

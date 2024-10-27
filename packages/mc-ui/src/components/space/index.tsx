@@ -1,3 +1,11 @@
+/*
+ * @Author: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
+ * @Date: 2024-10-22 10:47:33
+ * @LastEditors: Heng-Zhang2 Heng.Zhang2@budweiserapac.com
+ * @LastEditTime: 2024-10-27 14:34:24
+ * @FilePath: /mc-design/packages/mc-ui/src/components/space/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { getPrefixCls } from '@/utils';
 import type { SpaceProps } from '@nutui/nutui-react-taro';
 import { Space as NutSpace } from '@nutui/nutui-react-taro';
@@ -32,3 +40,5 @@ export const Space = (props: Partial<ISpaceProps>) => {
     />
   );
 };
+
+Space.display = 'mc-space';

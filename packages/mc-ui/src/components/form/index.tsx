@@ -116,3 +116,4 @@ type ComputedFormProps = React.ForwardRefExoticComponent<
 export const Form = InnerForm as ComputedFormProps;
 Form.Item = NutForm.Item;
 Form.useForm = NutForm.useForm;
+Form.displayName = 'mc-form';
